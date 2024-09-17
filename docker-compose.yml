@@ -1,0 +1,23 @@
+services:
+  chat_online:
+    container_name: char_online_cont
+    build: ./dockers/mywebsite
+    volumes:
+      - ./mywebsite/:/mywebsite
+    networks:
+      - red
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+  redis:
+    container_name: redis_cont
+    build: ./dockers/redis
+    expose:
+      - "6379"
+    networks:
+      - red
+
+networks:
+  red:
+    driver: bridge

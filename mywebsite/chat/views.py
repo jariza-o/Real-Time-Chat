@@ -12,7 +12,8 @@ def home(request):
 @login_required
 def room(request, room_id):
     try:
-        room = request.user.rooms_joined(id=room_id)
+        room = request.user.rooms_joined.get(id=room_id)
+        
     except Room.DoesNotExist:
         error_message = 'No tiene permisos de acceso a este Chat'
         return render(request, 'chat/home.html', {'error_message':error_message, 'rooms': Room.objects.all()})
