@@ -1,6 +1,6 @@
 services:
   chat_online:
-    container_name: char_online_cont
+    container_name: chat_online_cont
     build: ./dockers/mywebsite
     volumes:
       - ./mywebsite/:/mywebsite

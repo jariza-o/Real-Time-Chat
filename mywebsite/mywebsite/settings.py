@@ -77,6 +77,15 @@ WSGI_APPLICATION = 'mywebsite.wsgi.application'
 # ASGI = ASYNCHRONOUS SERVER GATEWEY INTERFACE
 ASGI_APPLICATION = 'mywebsite.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis_cont", 6379)], #redis_cont es la dirección del contenedor de redis
+        },
+    },
+}
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
