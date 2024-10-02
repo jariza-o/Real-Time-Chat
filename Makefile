@@ -14,5 +14,15 @@ all:
 	@docker compose up --build -d
 down:
 	@docker compose down
+stop:
+	@docker compose stop
+start:
+	@docker compose start
+clean: down
+	@docker system prune
+clean_all: down
+	@docker system prune -a
+clean_volumes: down
+	@docker volume rm $$(docker volume ls -q)
 
-.PHONY: all down
+.PHONY: all down clean clean_all clean_volumes
