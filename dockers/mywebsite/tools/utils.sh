@@ -10,13 +10,11 @@ NC='\033[0m'
 python3 manage.py makemigrations
 python3 manage.py migrate
 
-# Crear superusuario si no existe
+Create the superuser
 if [ -z "$(python manage.py shell -c 'from django.contrib.auth import get_user_model; User = get_user_model(); print(User.objects.filter(username="admin").exists())')" ]; then
-  python manage.py createsuperuser --noinput --username admin --email admin@example.com
+  python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', ${DJANGO_ADMIN_PASSWORD})"
+
 fi
 
-# Ejecutar el servidor de desarrollo
+# Run the development server
 exec "$@"
-
-# Run server
-# python3 manage.py runserver
